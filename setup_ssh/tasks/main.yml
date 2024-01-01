@@ -1,0 +1,13 @@
+---
+
+- name: Create ansible user
+  user:
+    name:        ansible
+    group:       root
+    home:        /home/ansible
+    shell:       /bin/bash
+    system:      no
+    state:       present
+    create_home: true
+
+
