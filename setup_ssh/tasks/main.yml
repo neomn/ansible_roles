@@ -11,3 +11,10 @@
     create_home: true
 
 
+- name: create .ssh directory for ansible
+  file: 
+    path:   /home/ansible/.ssh
+    state:  directory
+
+
+
