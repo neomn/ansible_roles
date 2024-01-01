@@ -35,3 +35,13 @@
     mode:  0440
       
 
+- name: replace sshd_config file with my custom sshd_config
+  template:
+    src:   ../templates/sshd_config.j2
+    dest:  /etc/ssh/sshd_config
+    owner: root
+    group: root
+    mode:  0644
+  notify: restart_sshd
+
+
