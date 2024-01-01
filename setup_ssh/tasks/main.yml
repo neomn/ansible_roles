@@ -17,4 +17,12 @@
     state:  directory
 
 
+- name: copy authorized_keys file
+  copy:
+    src:   ../files/authorized_keys
+    dest:  /home/ansible/.ssh
+    owner: ansible
+    group: root
+    mode:  0600
+
 
