@@ -21,13 +21,16 @@ you can setup ssh connection for any number of servers in seconds
     123.45.678.5    ansible_user=root    ansible_pass=server-password   ansible_port=22
     
 2- open /files/authorized_keys file and add your ssh public key
+
 3- done, now you can use the role, you can also modify ssh service configs in /templates/sshd_config.js file
 
 
 
 ## how to run the role:
 1- outside of the setup_ssh directory, create a yml file:
+
     touch ssh.yml
+    
 so the directory structure should be like this:
     
     ├── setup_ssh
