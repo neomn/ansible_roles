@@ -6,7 +6,7 @@ you can setup ssh connection for any number of servers in seconds
 ## this role will:
 + add a new user named ansible
 + add your ssh public key to ansible user
-+ grand root access for ansible user
++ grant root access for ansible user
 + disable ssh root login and restart ssh service
 
 
@@ -14,11 +14,11 @@ you can setup ssh connection for any number of servers in seconds
 1- copy your servers ip addresses and ssh user and password to the inventory file:
 
     [servers]
-    123.45.678.1    ansible_user=root    ansible_pass=server-password   ansible_port=22
-    123.45.678.2    ansible_user=root    ansible_pass=server-password   ansible_port=22
-    123.45.678.3    ansible_user=root    ansible_pass=server-password   ansible_port=22
-    123.45.678.4    ansible_user=root    ansible_pass=server-password   ansible_port=22
-    123.45.678.5    ansible_user=root    ansible_pass=server-password   ansible_port=22
+    123.45.678.1    ansible_user=root    ansible_password=server-password   ansible_port=22
+    123.45.678.2    ansible_user=root    ansible_password=server-password   ansible_port=22
+    123.45.678.3    ansible_user=root    ansible_password=server-password   ansible_port=22
+    123.45.678.4    ansible_user=root    ansible_password=server-password   ansible_port=22
+    123.45.678.5    ansible_user=root    ansible_password=server-password   ansible_port=22
     
 2- open /files/authorized_keys file and add your ssh public key
 
