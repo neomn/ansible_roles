@@ -12,6 +12,7 @@
 
 - name: Install docker dependency packages
   apt:
+    update_cache: true
     name:
       - ca-certificates
       - curl
