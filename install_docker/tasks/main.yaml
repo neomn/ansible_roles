@@ -1,25 +1,22 @@
 ---
-
-- name: Remove Docker-related packages
+- name: Remove unofficial docker packages
   apt:
-    name: "{{ item }}"
+    name:
+      - docker.io
+      - docker-doc
+      - docker-compose
+      - podman-docker
+      - containerd
+      - runc
     state: absent  
-  with_items:
-    - docker.io
-    - docker-doc
-    - docker-compose
-    - podman-docker
-    - containerd
-    - runc
 
 - name: Install docker dependency packages
   apt:
-    name: "{{ item }}"
+    name:
+      - ca-certificates
+      - curl
+      - gnupg
     state: present
-  loop:
-    - ca-certificates
-    - curl
-    - gnupg
 
 - name: Create the keyrings directory
   file:
