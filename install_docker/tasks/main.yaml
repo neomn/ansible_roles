@@ -25,28 +25,30 @@
     state: directory
     mode: '0755'
 
-- name: Add Docker's official GPG key
+- name: download Docker's official GPG key
   get_url:
     url: https://download.docker.com/linux/debian/gpg
     dest: /etc/apt/keyrings/docker.asc
     mode: '0644'
 
-- name: Dearmor Docker GPG key
-  command:
-    cmd: gpg --dearmor -o /etc/apt/keyrings/docker.gpg /etc/apt/keyrings/docker.asc
-    creates: /etc/apt/keyrings/docker.gpg
-
 - name: Set permissions for Docker GPG key
   file:
-    path: /etc/apt/keyrings/docker.gpg
+    path: /etc/apt/keyrings/docker.asc
     mode: '0644'
 
-- name: update repository cache
-  apt: 
-    update_cache: yes
-   
+- name: get system arch 
+  shell: dpkg --print-architecture
+  register: arch
+  changed_when: false
+
+- name: add docker repository to apt
+  apt_repository:
+    repo: "deb [arch={{ arch.stdout }} signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu   {{ ansible_distribution_release }} stable"
+    state: present
+
 - name: Install Docker engine packages
   apt:
+    update_cache: true
     name:
       - docker-ce
       - docker-ce-cli
@@ -59,16 +61,16 @@
   shell: |
     sudo usermod -aG docker $USER
 
-# this 3 steps are for updating ansible membership in the docker group 
-- name: switch to the root user
-  become: yes
-  become_user: root
-  command: whoami
-
-- name: switch back to previous user
-  become: yes
-  become_user: "{{ $USER }}"
-  command: whoami
+# this steps are for updating ansible membership in the docker group 
+# - name: switch to the root user
+#   become: yes
+#   become_user: root
+#   command: whoami
+#
+# - name: switch back to previous user
+#   become: yes
+#   become_user: "{{ echo $USER }}"
+#   command: whoami
 
 - name: Reset connection to refresh groups
   meta: reset_connection
